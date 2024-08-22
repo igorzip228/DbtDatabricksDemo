@@ -1,0 +1,14 @@
+version: 2
+
+models:
+ - name: new_table_model
+   columns:
+     - name: name
+       tests:
+         - dbt_expectations.expect_column_values_to_not_be_null
+     - name: salary
+       tests:
+        - dbt_expectations.expect_column_quantile_values_to_be_between:
+           quantile: 0.99
+           min_value: 10000
+           max_value: 100000
