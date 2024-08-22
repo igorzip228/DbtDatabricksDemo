@@ -18,3 +18,7 @@ models:
               meta:
                 description: The salary column in the new_table_model table should
                   contain only unique values
+      - name: department
+        data_tests:
+          - dbt_expectations.expect_column_values_to_not_be_null:
+              row_condition: departmentTTT is not null # Optional
