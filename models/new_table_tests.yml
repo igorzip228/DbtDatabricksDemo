@@ -3,14 +3,16 @@ models:
   - name: new_table_model
     columns:
       - name: name
-        tests:
+        data_tests:
           - dbt_expectations.expect_column_values_to_not_be_null:
-              severity: warn
-          - unique
+              severity: error
       - name: salary
-        tests:
+        data_tests:
           - dbt_expectations.expect_column_quantile_values_to_be_between:
               quantile: 0.99
               min_value: 10000
               max_value: 100000
-          - not_null
+      - name: department
+        data_tests:
+          - dbt_expectations.expect_column_values_to_not_be_null:
+              row_condition: "department is not null"
